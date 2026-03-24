@@ -87,5 +87,13 @@ Menurut saya, DashMap sangatlah diperlukan karena id dan url sifatnya unik sehin
 Menurut saya, keduanya sebenarnya dibutuhkan. Pola Singleton yang diterapkan lewat lazy_static hanya berfungsi untuk memastikan hanya punya satu sumber data global. Namun, Singleton saja tidak aman dari tabrakan data sehingga tetap wajib menggunakan DashMap agar variabel Singleton tersebut tidak rusak saat diakses atau diubah oleh banyak request secara bersamaan.
 
 #### Reflection Publisher-2
+1. In the Model-View Controller (MVC) compound pattern, there is no “Service” and “Repository”. Model in MVC covers both data storage and business logic. Explain based on your understanding of design principles, why we need to separate “Service” and “Repository” from a Model?
+Pemisahan ini bertujuan untuk menerapkan Single Responsibility Principle. Jika service dan repository digabungkan, maka model akan menjadi sangat besar dan sulit dikelola. Dengan melakukan pemisahan maka struktur kode akan menjadi jauh lebih teratur dan semuanya memiliki tanggung jawab yang jelas. Model murni hanya mendefinisikan struktur data, repository khusus menangani urusan database, dan service khusus menangani logika aplikasi. Pemisahan ini membuat kode lebih modular, mudah dibaca, dan jauh lebih mudah untuk dilakukan unit testing.
+
+2. What happens if we only use the Model? Explain your imagination on how the interactions between each model (Program, Subscriber, Notification) affect the code complexity for each model?
+Jika kita hanya menggunakan model, maka untuk interaksi akan tercipta ketergantungan yang tinggi dan kode yang berantakan. Misalnya, model Product harus tahu persis cara membuat Notification dan cara menyimpan Subscriber ke dalam database sehingga model akan dipenuhi oleh logika kompleks yang bukan tanggung jawabnya. Jika suatu saat ada perubahan kecil pada cara kerja notifikasi, maka terpaksa harus ikut mengedit kode di dalam model produk yang membuat sistem sangat rentan terhadap error.
+
+3. Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.
+Postman sangat membantu karena memungkinkan pengujian API backend secara langsung tanpa harus menunggu frontend selesai dibuat. Dapat dengan mudah melakukan simulasi pengiriman data  dan melihat langsung respons server.
 
 #### Reflection Publisher-3
