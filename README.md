@@ -97,3 +97,11 @@ Jika kita hanya menggunakan model, maka untuk interaksi akan tercipta ketergantu
 Postman sangat membantu karena memungkinkan pengujian API backend secara langsung tanpa harus menunggu frontend selesai dibuat. Dapat dengan mudah melakukan simulasi pengiriman data  dan melihat langsung respons server.
 
 #### Reflection Publisher-3
+1. Observer Pattern has two variations: Push model (publisher pushes data to subscribers) and Pull model (subscribers pull data from publisher). In this tutorial case, which variation of Observer Pattern that we use?
+Tutorial ini menggunakan Push Model. Hal ini terlihat dari cara kerja bambangshop yang secara aktif mengirimkan data lengkap dalam bentuk payload notifikasi langsung ke URL para Subscriber segera setelah terjadi perubahan status produk.
+
+2. What are the advantages and disadvantages of using the other variation of Observer Pattern for this tutorial case? (example: if you answer Q1 with Push, then imagine if we used Pull)
+Jika menggunakan Pull Model, maka subscriber harus secara aktif menanyakan atau menarik data dari publisher secara berkala. Keuntungannya adalah subscriber memiliki kendali penuh atas kapan mereka ingin memproses data sehingga tidak akan terbebani jika publisher melakukan pembaruan besar dalam waktu singkat. Kerugiannya adalah model ini tidak efisien dalam penggunaan sumber daya jaringan karena subscriber akan terus melakukan pemanggilan API meskipun tidak ada perubahan data. Selain itu, aspek real time akan hilang karena ada latency antara saat data berubah di publisher sampai saat subscriber melakukan penarikan data berikutnya.
+
+3. Explain what will happen to the program if we decide to not use multi-threading in the notification process.
+Jika tidak menggunakan multi-threading, maka proses pengiriman notifikasi akan berjalan secara sinkron. Akibatnya adalah setiap kali ada produk baru maka publisher akan hang dan tidak bisa merespons pengguna sampai seluruh proses pengiriman pesan ke semua subscriber selesai. Jika salah satu subscriber memiliki koneksi internet yang lambat atau servernya mati, hal ini akan menghambat seluruh performa aplikasi utama bambangshop.
